@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_paper_trail_whodunnit
   include Passwordless::ControllerHelpers
   http_basic_authenticate_with name: 'camden', password: 'camden'
   helper_method :current_user
