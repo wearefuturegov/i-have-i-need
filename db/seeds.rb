@@ -9,6 +9,8 @@
 ActiveRecord::Base.transaction do
   puts "Seeding the database..."
 
+  Faker::Config.locale = 'en-GB'
+
   FactoryBot.create_list(:organisation, 2).each do |organisation|
     FactoryBot.create_list(:user, 5, organisation: organisation).each do |user|
       contact_list = FactoryBot.create :contact_list
@@ -17,12 +19,15 @@ ActiveRecord::Base.transaction do
 
       contacts = FactoryBot.create_list :contact, 50, contact_list: contact_list
 
+      need_categories = ['groceries and cooked meals', 'physical and mental wellbeing', 'financial support',
+                        'staying Social', 'prescription pickups', 'book drops and entertainment', 'dog walking', 'other']
+
       contacts.first(10).each do |contact|
         [1, 2, 3].sample.times do
           FactoryBot.create :need,
                             contact: contact,
                             user: user,
-                            category: %w(Food Medicine Other).sample,
+                            category: need_categories.sample,
                             completed_on: [nil, [1,2,3].sample.days.ago].sample
         end
       end
