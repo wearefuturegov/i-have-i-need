@@ -18,6 +18,8 @@ gem 'turbolinks', '~> 5'
 gem 'webpacker', '~> 4.0'
 gem 'sendgrid_actionmailer_adapter'
 gem 'strong_migrations'
+gem 'factory_bot_rails'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -38,8 +40,6 @@ group :test do
 end
 
 group :development, :test do
-  gem 'factory_bot_rails'
-  gem 'faker'
   gem 'pry-byebug'
   gem 'pry-rails'
   gem 'rspec-rails', '~> 4.0.0'
