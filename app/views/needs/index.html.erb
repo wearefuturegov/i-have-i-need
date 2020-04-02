@@ -1,40 +1,45 @@
 <p id="notice"><%= notice %></p>
 
 <div class="page-header">
-  <h1 class="page-title">All needs <span class="page-title__count">(<%= @needs.total_count %>)</span></h1>
+  <h1 class="page-title">Needs <span class="page-title__count">(<%= @needs.total_count %>)</span></h1>
 </div>
 
-<%= form_with(url: needs_url, method: :get, local: true) do %>
-  <table class="table needs-table">
-    <tfoot>
-    <tr>
-      <th>
-        <%= select_tag("user_id", content_tag(:option,'Unassigned',:value => "Unassigned", :selected => params["user_id"] == "Unassigned") + options_from_collection_for_select(@users, :id, :name_or_email, :selected => params['user_id']), prompt: 'Select a user') %>
-      </th>
-      <th>
-        <!-- has to be empty -->
-      </th>
-      <th>
-        <!-- has to be empty -->
-      </th>
-      <th>
-        <%= select_tag("status", options_for_select(need_statuses, :selected => get_param_capitalized('status')), prompt: 'Select a status') %>
-      </th>
-      <th>
-        <!-- has to be empty -->
-      </th>
-      <th>
-        <%= select_tag("category", content_tag(:option,'Other',:value => "Other", :selected => params["category"] == "Other") + options_for_select(needs, :selected => get_param_capitalized('category')), prompt: 'Select a category') %>
-      </th>
-      <th>
-        <!-- has to be empty -->
-      </th>
-    </tr>
-    </tfoot>
-  </table>
-  <%= submit_tag("Search") %>
-<% end %>
-<br/>
+<details class="filters">
+  <summary class="filters__summary">Search and filter</summary>
+  <%= form_with(url: needs_url, method: :get, local: true) do %>
+    <table class="table needs-table">
+      <tfoot>
+      <tr>
+        <th class="field">
+          <label for="user_id" class="field__label">By assigned user</label>
+          <%= select_tag("user_id", content_tag(:option,'Unassigned',:value => "Unassigned", :selected => params["user_id"] == "Unassigned") + options_from_collection_for_select(@users, :id, :name_or_email, :selected => params['user_id']), prompt: 'All') %>
+        </th>
+        <th class="hidden">
+          <!-- has to be empty -->
+        </th>
+        <th class="hidden">
+          <!-- has to be empty -->
+        </th>
+        <th class="field">
+          <label for="status" class="field__label">By status</label>
+          <%= select_tag("status", options_for_select(need_statuses, :selected => get_param_capitalized('status')), prompt: 'All') %>
+        </th>
+        <th class="hidden">
+          <!-- has to be empty -->
+        </th>
+        <th class="field">
+          <label for="category" class="field__label">By category</label>
+          <%= select_tag("category", content_tag(:option,'Other',:value => "Other", :selected => params["category"] == "Other") + options_for_select(needs, :selected => get_param_capitalized('category')), prompt: 'All') %>
+        </th>
+        <th class="hidden">
+          <!-- has to be empty -->
+        </th>
+      </tr>
+      </tfoot>
+    </table>
+    <%= submit_tag("Apply") %>
+  <% end %>
+</details>
 
 <form action="/needs" method="get">
   <%= render 'shared/needs_table', needs: @needs %>

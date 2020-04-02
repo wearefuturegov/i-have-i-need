@@ -17,6 +17,13 @@ textarea{
 
 select {
   background: #FFF;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg width='22' height='13' viewBox='0 0 22 13' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5 1.5L11 11L20.5 1.5' stroke='%232A2828' stroke-width='2'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 97% center;
+  padding-right: 50px;
 }
 
 .button,
@@ -72,7 +79,7 @@ button{
   }
 
   .field{
-    margin-bottom: 0px;
+    // margin-bottom: 0px;
   }
   @supports (display: grid){
     &.field-section--two-cols{
@@ -91,7 +98,7 @@ button{
 .field{
     margin-bottom: 35px;
     @media screen and (min-width: $breakpoint-m){
-      margin-bottom: 55px;
+      // margin-bottom: 55px;
     }
     .field__label{
       color: $grey;

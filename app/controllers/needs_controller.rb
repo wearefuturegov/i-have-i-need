@@ -65,20 +65,21 @@ class NeedsController < ApplicationController
   end
 
   private
-    def set_need
-      @need = Need.find(params[:id])
-      @contact = @need.contact
-    end
 
-    def set_contact
-      @contact = Contact.find(params[:contact_id])
-    end
+  def set_need
+    @need = Need.find(params[:id])
+    @contact = @need.contact
+  end
 
-    def need_params
-      params.require(:need).permit(:name, :due_by, :user_id, :category)
-    end
+  def set_contact
+    @contact = Contact.find(params[:contact_id])
+  end
 
-    def needs_params
-      params.require(:needs).permit!
-    end
+  def need_params
+    params.require(:need).permit(:name, :status, :user_id, :category)
+  end
+
+  def needs_params
+    params.require(:needs).permit!
+  end
 end

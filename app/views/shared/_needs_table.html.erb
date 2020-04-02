@@ -1,47 +1,64 @@
-<table class="table data-table">
-  <thead>
-  <tr>
-    <th>Assigned to</th>
-    <th>Person</th>
-    <th>Need
-      <%= link_to 'Asc', @params.merge(order: 'name', order_dir: 'ASC') %>
-      <%= link_to 'Desc', @params.merge(order: 'name', order_dir: 'DESC') %>
-    </th>
-    <th>Status</th>
-    <th>Vulnerable</th>
-    <th>Category
-      <%= link_to 'Asc', @params.merge(order: 'category', order_dir: 'ASC') %>
-      <%= link_to 'Desc', @params.merge(order: 'category', order_dir: 'DESC') %>
-    </th>
-    <th>Date logged
-      <%= link_to 'Asc', @params.merge(order: 'created_at', order_dir: 'ASC') %>
-      <%= link_to 'Desc', @params.merge(order: 'created_at', order_dir: 'DESC') %>
-    </th>
-  </tr>
-  </thead>
-  <tbody>
-  <% needs.each do |need| %>
+<div class="table-holder">
+  <table class="table data-table">
+    <thead>
     <tr>
-      <% if need.user %>
-        <td><%= need.user_name %></td>
-      <% else %>
-        <td>Unassigned</td>
-      <% end %>
-      <td><%= link_to(need.contact_name, contact_path(need.contact.id)) %></td>
-      <td><strong><%= link_to need.name, need %></strong></td>
-      <td><%= status(need.completed_on) %></td>
-      <td>
-        <% if need.contact_is_vulnerable %>
-          <%= image_tag "red-tick.svg", alt: "vulnerable" %>
-        <% else %>
-          —
-        <% end %>
-      </td>
-      <td><%= need.category.humanize %>
-      <td><%= format_datetime(need.created_at) %></td>
+      <th>Assigned to</th>
+      <th>Person</th>
+      <th>
+        <div class="sorter">
+          Need
+          <div class="sorter__controls">
+            <%= link_to_unless_current image_tag("sort-asc.svg", alt: "sort ascending"), @params.merge(order: 'name', order_dir: 'ASC') do %><%= image_tag "sort-asc-grey.svg", alt: "sorted ascending" %><% end %>
+            <%= link_to_unless_current image_tag("sort-desc.svg", alt: "sort descending"), @params.merge(order: 'name', order_dir: 'DESC') do %><%= image_tag "sort-desc-grey.svg", alt: "sorted descending" %><% end %>
+          </div>
+        </div>
+      </th>
+      <th>Status</th>
+      <th>Vulnerable</th>
+      <th>
+        <div class="sorter">
+          Category
+          <div class="sorter__controls">
+            <%= link_to_unless_current image_tag("sort-asc.svg", alt: "sort ascending"), @params.merge(order: 'category', order_dir: 'ASC') do %><%= image_tag "sort-asc-grey.svg", alt: "sorted ascending" %><% end %>
+            <%= link_to_unless_current image_tag("sort-desc.svg", alt: "sort descending"), @params.merge(order: 'category', order_dir: 'DESC') do %><%= image_tag "sort-desc-grey.svg", alt: "sorted descending" %><% end %>
+          </div>
+        </div>
+      </th>
+      <th>
+        <div class="sorter">
+          Date logged
+          <div class="sorter__controls">
+            <%= link_to_unless_current image_tag("sort-asc.svg", alt: "sort ascending"), @params.merge(order: 'created_at', order_dir: 'ASC') do %><%= image_tag "sort-asc-grey.svg", alt: "sorted ascending" %><% end %>
+            <%= link_to_unless_current image_tag("sort-desc.svg", alt: "sort descending"), @params.merge(order: 'created_at', order_dir: 'DESC') do %><%= image_tag "sort-desc-grey.svg", alt: "sorted descending" %><% end %>
+          </div>
+        </div>
+      </th>
     </tr>
-  <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+    <% needs.each do |need| %>
+      <tr>
+        <% if need.user %>
+          <td><%= need.user_name %></td>
+        <% else %>
+          <td>Unassigned</td>
+        <% end %>
+        <td><%= link_to(need.contact_name, contact_path(need.contact.id)) %></td>
+        <td><strong><%= link_to need.name, need %></strong></td>
+        <td><%= status(need.completed_on) %></td>
+        <td>
+          <% if need.contact_is_vulnerable %>
+            <%= image_tag "red-tick.svg", alt: "vulnerable" %>
+          <% else %>
+            —
+          <% end %>
+        </td>
+        <td><%= need.category.humanize %>
+        <td><%= format_datetime(need.created_at) %></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
 
 <%= paginate(@needs) %>

@@ -1,96 +1,88 @@
+<% if @contact.is_vulnerable %>
+  <div class="vulnerable-banner">
+    <div class="container"><%= image_tag "exclamation.svg", alt: "" %> This is a vulnerable person</div>
+  </div>
+<% end %>
 
-    <% if @contact.is_vulnerable %>
-      <div class="vulnerable-banner">
-        <div class="container"><%= image_tag "exclamation.svg", alt: "" %> This is a vulnerable person</div>
+<% if notice %>
+  <p class="notice"><%= notice %></p>
+<% end %>
+
+<ol class="breadcrumb">
+  <li><%= link_to "People in need", contacts_path %></li>
+  <li>Person</li>
+</ol>
+
+<div class="tabs">
+  <div class="tabs__tab"><%= link_to 'Profile' , @need.contact %></div>
+  <%= link_to "#{@contact.first_name}'s Needs (#{@contact.needs.count})", contact_needs_path(@contact), class: 'tabs__tab tabs__tab--current' %>
+</div>
+
+<div class="page-header page-header--with-button">
+  <h1 class="page-title"><%= @need.category.humanize %></h1>
+  <%= link_to 'Edit need', edit_need_path(@need), class: 'button pull-right' %>
+</div>
+
+<div class="contact-profile">
+  <div class="contact-profile__left">
+    <div class="contact-profile__row">
+      <strong>Assigned to</strong>
+      <span>
+        <% if @need.user %>
+          <%= @need.user.name_or_email %>
+        <% else %>
+          Unassigned
+        <% end %>
+      </span>
+    </div>
+    <div class="contact-profile__row">
+      <strong>Status</strong>
+      <span><%= @need.status %></span>
+    </div>
+    <div class="contact-profile__row">
+      <strong>Description</strong>
+      <span><%= @need.name %></span>
+    </div>
+  </div>
+  <div class="contact-profile__right">
+    <div class="contact-profile__right__title">
+      <span>Profile</span>
+    </div>
+    <div class="contact-profile__row">
+      <strong>Address:</strong>
+      <%= @contact.address %>
+    </div>
+
+    <% if @contact.telephone %>
+      <div class="contact-profile__row">
+        <strong>Phone:</strong>
+        <%= @contact.telephone %>
       </div>
     <% end %>
 
-    <% if notice %>
-      <p class="notice"><%= notice %></p>
+    <% if @contact.mobile %>
+      <div class="contact-profile__row">
+        <strong>Mobile:</strong>
+        <%= @contact.mobile %>
+      </div>
     <% end %>
 
-    <ol class="breadcrumb">
-      <li><%= link_to "People", contacts_path %></li>
-      <li><%= link_to @need.contact.name, @need.contact %></li>
-      <li><%= @need.name %></li>
-    </ol>
-
-    <div class="page-header">
-      <h1 class="page-title"><%= @need.name %></h1>
-    </div>
-
-    <table class="table">
-      <tbody>
-        <tr>
-          <td><%= @need.name %></td>
-          <td><%= @need.completed_on.present? ? 'Complete' : 'Incomplete' %></td>
-          <% if @need.user %>
-            <td>Assigned to <%= @need.user.name_or_email %></td>
-          <% else %>
-            <td>Unassigned</td>
-          <% end %>
-          <td><%= @need.category.humanize %></td>
-          <td><%= @need.due_by.strftime("%d/%m/%Y %I:%M%p") %></td>
-          <td><%= link_to 'Edit', edit_need_path(@need) %></td>
-        </tr>
-      </tbody>
-    </table>
-
-    <hr>
-
-    <h2>For <%= "#{@contact.first_name} #{@contact.middle_names} #{@contact.surname}" %></h2>
-
-    <div class="contact-profile">
-      <div class="contact-profile__left">
-        <div class="contact-profile__row">
-          <strong>Address</strong><span><%= @contact.address %></span>
-        </div>
-
-        <div class="contact-profile__row">
-          <strong>Phone:</strong>
-          <%= @contact.telephone %>
-        </div>
-
-        <div class="contact-profile__row">
-          <strong>Mobile:</strong>
-          <%= @contact.mobile %>
-        </div>
-
-        <div class="contact-profile__row">
-          <strong>NHS Number</strong><span>PLACEHOLDER</span>
-        </div>
-
-      </div>
-      <div class="contact-profile__right">
-        <div class="contact-profile__row">
-          <strong>Needs:</strong>
-          PLACEHOLDER
-        </div>
-
-        <div class="contact-profile__row">
-          <strong>Additional Information</strong>
-          PLACEHOLDER
-        </div>
-      </div>
-    </div>
-    <div>
-      <%= link_to "More about #{@contact.name}", contact_path(@contact) %>
-    </div>
-
-<section class="notes">
-  <h2>Notes (<%= @need.notes.count %>)</h2>
-
-  <div class="notes-list">
-    <% @need.notes.each do |note| %>
-      <div class="note">
-        <header class="note__header">
-          <strong class="note__author"><%= note.user.name_or_email %></strong>
-          <span class="note__created"><%= note.created_at.strftime("%-d %B %Y %k:%M%P") %></span>
-        </header>
-        <p class="two-thirds"><%= note.body %></p>
+    <% if @contact.additional_info %>
+      <div class="contact-profile__row">
+        <strong>Additional info:</strong>
+        <%= @contact.additional_info %>
       </div>
     <% end %>
   </div>
+</div>
+
+<section class="notes">
+  <h2>
+    Notes
+    <% if @need.notes.count > 0 %>
+      (<%= @need.notes.count %>)
+    <% end %>
+  </h2>
 
   <%= form_with(model: [@need, @need.notes.build], local: true) do |form| %>
     <div class="field">
@@ -99,4 +91,19 @@
     </div>
     <%= form.submit %>
   <% end %>
+
+  <div class="notes-list">
+    <% @need.notes.reverse_each do |note| %>
+      <% next if note == @need.notes.last %>
+      <div class="note">
+        <header class="note__header">
+          <strong class="note__author"><%= note.user.name_or_email %></strong>
+          <span class="note__created"><%= time_ago_in_words(note.created_at) %> ago</span>
+        </header>
+        <p class="two-thirds"><%= note.body %></p>
+      </div>
+    <% end %>
+  </div>
+
+
 </section>

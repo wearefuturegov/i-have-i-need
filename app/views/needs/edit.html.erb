@@ -9,13 +9,24 @@
 <% end %>
 
 <ol class="breadcrumb">
-  <li><%= link_to "People", contacts_path %></li>
-  <li><%= link_to @need.contact.first_name, @need.contact %></li>
-  <li><%= link_to "Needs", needs_path %></li>
-  <li><%= @need.name %></li>
+  <li><%= link_to "People in need", contacts_path %></li>
+  <li>Person</li>
 </ol>
 
+<div class="tabs">
+  <div class="tabs__tab"><%= link_to 'Profile' , @need.contact %></div>
+  <%= link_to "#{@contact.first_name}'s Needs (#{@contact.needs.count})", contact_needs_path(@contact), class: 'tabs__tab tabs__tab--current' %>
+</div>
+
 <%= form_with(model: @need, local: true) do |form| %>
+
+  <div class="page-header page-header--with-button">
+    <h1 class="page-title"><%= @need.category.humanize %></h1>
+    <%= form.submit 'Save', class: 'button pull-right' %>
+  </div>
+
+  <div class="go-back"><%= link_to 'Back', need_path(@need) %></div>
+
   <% if @need.errors.any? %>
     <div class="error_explanation">
       <h2><%= pluralize(@need.errors.count, "error") %> prohibited this need from being saved:</h2>
@@ -28,68 +39,21 @@
     </div>
   <% end %>
 
-  <section class="field-section">
-    <fieldset class="field-section margin-bottom-70">
-      <div class="field">
-        <%= form.label 'Description' %><br>
-        <%= form.text_field :name %>
+  <div class="contact-profile">
+    <div class="contact-profile__left">
+      <div class="contact-profile__row">
+        <strong><%= form.label :user_id, 'Assigned to' %></strong>
+        <%= form.collection_select :user_id, @users, :id, :name_or_email, include_blank: 'Unassigned' %>
       </div>
-      <div class="flex">
-        <div class="field">
-          <%= form.label 'Assigned' %><br>
-          <%= form.collection_select :user_id, @users, :id, :name_or_email, include_blank: 'Unassigned'  %>
-        </div>
-        <div class="field">
-          <%= form.label 'Category' %><br>
-          <%= form.select "category", options_for_select(%w(food medicine)) %>
-        </div>
-        <div class="field">
-          <%= form.label 'Due by' %><br>
-          <%= form.text_field :due_by %>
-        </div>
+      <div class="contact-profile__row">
+        <strong><%= form.label :status, 'Status' %></strong>
+        <%= form.select :status, %w[Todo Complete] %>
       </div>
-    </fieldset>
-  </section>
-  <%= form.submit "Save" %>
+      <div class="contact-profile__row">
+        <strong><%= form.label :name, 'Description' %></strong>
+        <span><%= form.text_area :name %></span>
+      </div>
+    </div>
+  </div>
+
 <% end %>
-
-<hr>
-
-<h2>For <%= "#{@contact.first_name} #{@contact.middle_names} #{@contact.surname}" %></h2>
-
-<div class="contact-profile">
-  <div class="contact-profile__left">
-    <div class="contact-profile__row">
-      <strong>Address</strong><span><%= @contact.address %></span>
-    </div>
-
-    <div class="contact-profile__row">
-      <strong>Phone:</strong>
-      <%= @contact.telephone %>
-    </div>
-
-    <div class="contact-profile__row">
-      <strong>Mobile:</strong>
-      <%= @contact.mobile %>
-    </div>
-
-    <div class="contact-profile__row">
-      <strong>NHS Number</strong><span>PLACEHOLDER</span>
-    </div>
-
-  </div>
-  <div class="contact-profile__right">
-    <div class="contact-profile__row">
-      <strong>Needs:</strong>
-      PLACEHOLDER
-    </div>
-
-    <div class="contact-profile__row">
-      <strong>Additional Information</strong>
-      PLACEHOLDER
-    </div>
-  </div>
-</div>
-<div>
-  <%= link_to "More about #{@contact.name}", contact_path(@contact) %>
-</div>

@@ -6,16 +6,16 @@
     <header class="site-header">
       <div class="site-header__inner container">
 
-        <%= link_to image_tag('logo-camden.svg'), root_path, alt: council_name, class: "site-header__logo" %>
+        <%= link_to image_tag(logo_path), root_path, alt: council_name, class: "site-header__logo" %>
 
         <nav class="site-header__nav">
           <ul class="site-header__links">
             <li class="site-header__link site-header__link--has-submenu">
               <%= link_to_unless_current 'Needs', needs_path, controller: :needs %>
               <ul class="site-header__submenu">
-                <li class="site-header__submenu-link"><%= link_to 'To do', controller: :needs, action: :index, user_id: current_user.id, status: 'To do' %></li>
-                <li class="site-header__submenu-link"><%= link_to 'Unassigned', controller: :needs, action: :index, user_id: 'Unassigned', status: 'To do' %></li>
-                <li class="site-header__submenu-link"><%= link_to 'All', controller: :needs, action: :index %></li>
+                <li class="site-header__submenu-link"><%= link_to 'My to do list', controller: :needs, action: :index, user_id: current_user.id, status: 'To do' %></li>
+                <li class="site-header__submenu-link"><%= link_to 'All unmet needs to do', controller: :needs, action: :index, user_id: 'Unassigned', status: 'To do' %></li>
+                <li class="site-header__submenu-link"><%= link_to 'All needs', controller: :needs, action: :index %></li>
               </ul>
             </li>
             <li class="site-header__link"><%= link_to_unless_current 'People', contacts_path, controller: :contacts %></li>

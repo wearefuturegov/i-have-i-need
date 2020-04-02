@@ -1,28 +1,32 @@
+default: &default
   demo:
     name: "Demo Council"
     support_email: "help@beacon.support"
     copyright_notice: "© 2020 Demo Council"
-    logo_path: "camden.svg"
-    privacy_link: "https://www.camden.gov.uk/data-protection-privacy-and-cookies"
-    default_from_address: "CHANGE_ME@example.com"
+    logo_path: "logo-camden.svg"
+    privacy_link: "#"
+    default_from_address: "noreply@beacon.support"
 
   hackney:
     name: "Hackney Council"
     support_email: "help@beacon.support"
     copyright_notice: "© 2020 Hackney Council"
-    logo_path: "hackney.svg"
+    logo_path: "logo-hackney.svg"
     privacy_link: "https://www.hackney.gov.uk/privacy"
-    default_from_address: "CHANGE_ME@example.com"
+    default_from_address: "noreply@hackney.beacon.support"
 
   camden:
     name: "Camden Council"
     support_email: "help@beacon.support"
     copyright_notice: "© 2020 Camden Council"
-    logo_path: "camden.svg"
-    privacy_link: "#"
-    default_from_address: "CHANGE_ME@example.com"
+    logo_path: "logo-camden.svg"
+    privacy_link: "https://www.camden.gov.uk/data-protection-privacy-and-cookies"
+    default_from_address: "noreply@camden.beacon.support"
 
 development:
+  <<: *default
+
+test:
   <<: *default
 
 production:

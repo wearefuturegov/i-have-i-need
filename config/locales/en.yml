@@ -36,3 +36,7 @@ en:
         user: "Assignee"
         name: "Task body"
         due_by: "Due by date"
+  passwordless:
+    mailer:
+      subject: "Continue your login"
+      magic_link: "Use this special link to continue your login: %{link}"

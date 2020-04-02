@@ -36,4 +36,17 @@ class Need < ApplicationRecord
 
   delegate :name, :is_vulnerable, to: :contact, prefix: true
   delegate :name, to: :user, prefix: true
+
+  def status
+    completed_on.present? ? 'Complete' : 'To do'
+  end
+
+  def status=(state)
+    self.completed_on = if state == 'Complete'
+                          DateTime.now
+                        else
+                          ''
+                        end
+    save
+  end
 end

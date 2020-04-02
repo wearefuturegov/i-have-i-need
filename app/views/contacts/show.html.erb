@@ -15,68 +15,45 @@
 
 <div class="tabs">
   <div class="tabs__tab tabs__tab--current">Profile</div>
-  <%= link_to "View #{@contact.first_name}'s Needs (#{@contact.needs.count})", { controller: :contacts, action: :show_needs }, class: 'tabs__tab' %>
+  <%= link_to "#{@contact.first_name}'s Needs (#{@contact.needs.count})", { controller: :contacts, action: :show_needs }, class: 'tabs__tab' %>
 </div>
 
-<div class="page-header">
+<div class="page-header page-header--with-button">
   <h1 class="page-title"><%= "#{@contact.first_name} #{@contact.middle_names} #{@contact.surname}" %></h1>
+  <%= link_to 'Edit profile', edit_contact_path(@contact), class: 'button pull-right' %>
 </div>
 
 <div class="contact-profile">
   <div class="contact-profile__left">
     <div class="contact-profile__row">
-      <strong>NHS number</strong><span>placeholder</span>
-      <span>
-        <%= link_to 'Edit', edit_contact_path(@contact) %>
-      </span>
+      <strong>Address</strong>
+      <span><%= @contact.address %></span>
     </div>
-    <div class="contact-profile__row">
-      <strong>Medical conditions</strong><span>placeholder</span>
-      <span>
-        <%= link_to 'Edit', edit_contact_path(@contact) %>
-      </span>
-    </div>
-    <div class="contact-profile__row">
-      <strong>Essential supplies</strong><span>placeholder</span>
-      <span>
-       <%= link_to 'Edit', edit_contact_path(@contact) %>
-      </span>
-    </div>
-    <div class="contact-profile__row">
-      <strong>Notes</strong><span>placeholder</span>
-      <span>
-        <%= link_to 'Edit', edit_contact_path(@contact) %>
-      </span>
-    </div>
-  </div>
-  <div class="contact-profile__right">
-    <div class="contact-profile__right__title">
-      <span>Contact Details</span>
-      <%= link_to 'Edit', edit_contact_path(@contact) %>
-    </div>
-    <div class="contact-profile__row">
-      <strong>Address:</strong>
-      <%= @contact.address %>
-    </div>
-
     <div class="contact-profile__row">
       <strong>Postcode:</strong>
-      <%= @contact.postcode %>
+      <span><%= @contact.postcode %></span>
     </div>
 
     <div class="contact-profile__row">
       <strong>Email:</strong>
-      <%= @contact.email %>
+      <span><%= @contact.email %></span>
     </div>
 
     <div class="contact-profile__row">
-      <strong>Phone:</strong>
-      <%= @contact.telephone %>
+      <strong>Landline:</strong>
+      <span><%= @contact.telephone %></span>
     </div>
 
     <div class="contact-profile__row">
       <strong>Mobile:</strong>
-      <%= @contact.mobile %>
+      <span><%= @contact.mobile %></span>
     </div>
+
+    <% if @contact.additional_info %>
+      <div class="contact-profile__row">
+        <strong>Additional info:</strong>
+        <span><%= @contact.additional_info %></span>
+      </div>
+    <% end %>
   </div>
 </div>

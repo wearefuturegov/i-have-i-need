@@ -1,3 +1,9 @@
+<% if @contact.is_vulnerable %>
+  <div class="vulnerable-banner">
+    <div class="container"><%= image_tag "exclamation.svg", alt: "" %> This is a vulnerable person</div>
+  </div>
+<% end %>
+
 <ol class="breadcrumb">
   <li><%= link_to "People in need", contacts_path %></li>
   <li>Person</li>
@@ -5,7 +11,7 @@
 
 <div class="tabs">
   <%= link_to 'Profile', contact_path(@contact), class: 'tabs__tab' %>
-  <div class="tabs__tab tabs__tab--current">View <%= @contact.first_name %>'s Needs (<%= @contact.needs.count %>)</div>
+  <div class="tabs__tab tabs__tab--current"><%= @contact.first_name %>'s Needs (<%= @contact.needs.count %>)</div>
 </div>
 
 <div class="page-header page-header--with-button">
@@ -16,24 +22,22 @@
 <table class="table">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Notes</th>
-    <th>Assigned</th>
+    <th>Need type</th>
     <th>Date added</th>
+    <th>Assigned to</th>
     <th></th>
   </tr>
   </thead>
   <tbody>
   <% @contact.needs.each do |need_item| %>
     <tr>
-      <td><%= need_item.name %></td>
-      <td><%# todo: need notes count %></td>
+      <td><%= need_item.category.humanize %></td>
+      <td><%= need_item.created_at.strftime("%d/%m/%Y at %I:%M%p") %></td>
       <% if need_item.user %>
         <td>Assigned to <%= need_item.user.name_or_email %></td>
       <% else %>
         <td>Unassigned</td>
       <% end %>
-      <td><%= need_item.created_at.strftime("%d/%m/%Y at %I:%M%p") %></td>
       <td><%= link_to 'View', need_path(need_item) %></td>
     </tr>
   <% end %>

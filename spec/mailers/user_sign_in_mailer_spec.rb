@@ -14,7 +14,7 @@ RSpec.describe UserSignInMailer, type: :mailer do
     end
 
     it 'is sent from the applications noreply address' do
-      expect(mail.from).to eq("noreply@https://i-have-i-need.herokuapp.com")
+      expect(mail.from).to eq(["noreply@beacon.support"])
     end
   end
 end
