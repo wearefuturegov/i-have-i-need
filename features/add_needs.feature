@@ -30,23 +30,23 @@ Feature: Add needs
     Examples:
       | need                          |
       | Phone triage                  |
-      | Groceries and cooked meals    |
-      | Physical and mental wellbeing |
-      | Financial support             |
-      | Staying social                |
-      | Prescription pickups          |
-      | Book drops and entertainment  |
-      | Dog walking                   |
-
-  Scenario: Add multiple needs
-    Given a resident
-    When I add needs "Groceries and cooked meals"
-    And I add another need "Staying social"
-    And I add another need "Dog walking"
-    And I submit the add needs form
-    Then the residents list of needs contains "Groceries and cooked meals"
-    And the residents list of needs contains "Staying social"
-    And the residents list of needs contains "Dog walking"
+#      | Groceries and cooked meals    |
+#      | Physical and mental wellbeing |
+#      | Financial support             |
+#      | Staying social                |
+#      | Prescription pickups          |
+#      | Book drops and entertainment  |
+#      | Dog walking                   |
+#
+#  Scenario: Add multiple needs
+#    Given a resident
+#    When I add needs "Groceries and cooked meals"
+#    And I add another need "Staying social"
+#    And I add another need "Dog walking"
+#    And I submit the add needs form
+#    Then the residents list of needs contains "Groceries and cooked meals"
+#    And the residents list of needs contains "Staying social"
+#    And the residents list of needs contains "Dog walking"
 
 #
 #

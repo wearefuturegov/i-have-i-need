@@ -69,6 +69,24 @@ Capybara.register_driver :remote_chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome, url: 'http://localhost:9515', desired_capabilities: capabilities)
 end
 
+Capybara.register_driver :browser_stack do |app|
+  url = "http://#{ENV['BS_USERNAME']}:#{ENV['BS_AUTHKEY']}@hub-cloud.browserstack.com/wd/hub"
+
+  caps = Selenium::WebDriver::Remote::Capabilities.new
+  caps['browser'] = ENV['BS_BROWSER'] || 'chrome'
+  caps['browser_version'] = ENV['BS_BROWSER_VERSION'] if ENV['BS_BROWSER_VERSION']
+
+  caps['os'] = ENV['BS_OS']
+  caps['os_version'] = ENV['BS_OS_VERSION']
+
+  caps['name'] = 'BrowserStack [Beacon] Acceptance Tests'
+  caps['browserstack.local'] = 'true'
+
+  Capybara::Selenium::Driver.new(app,
+                                 :browser => :remote, :url => url,
+                                 :desired_capabilities => caps)
+end
+
 if ENV['BROWSER']
   DatabaseCleaner.strategy = :truncation
   Capybara.default_driver = ENV['BROWSER'].to_sym
