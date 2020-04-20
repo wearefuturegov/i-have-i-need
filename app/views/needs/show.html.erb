@@ -4,8 +4,11 @@
 
 <%= render "shared/vulnerable-banner" %>
 
-<div class="with-left-sidebar">
+<h2>Currently viewing this page</h2>
+<ul id="people-list"></ul>
 
+<div id="contact_id" hidden="hidden"><%= @contact.id %></div>
+<div class="with-left-sidebar">
   <aside class="with-left-sidebar__left">
     <header class="panel-header">
       <h2 class="panel-header__title">Profile</h2>
@@ -56,8 +59,8 @@
       <%= render "notes" %>
     </div>
   </aside>
-
 </div>
+<%= javascript_pack_tag 'users_viewing_page.js' %>
 
 
 
