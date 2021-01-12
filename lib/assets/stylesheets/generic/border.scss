@@ -1,0 +1,32 @@
+$sizes: (
+  sm: 1px,
+  md: 2px,
+  lg: 3px
+);
+
+$dimensions: (
+  top: t,
+  right: r,
+  left: l,
+  bottom: b
+);
+
+@each $label, $size in $sizes {
+  .b-#{$label} {
+    border: {
+      style: solid;
+      width: $size;
+    }
+
+    @each $dimension, $short in $dimensions {
+      &__#{$short} {
+        border-#{$dimension}-style: solid;
+        border-#{$dimension}-width: $size;
+      }
+    }
+  }
+}
+
+.b-circle {
+  border-radius: 50%;
+}

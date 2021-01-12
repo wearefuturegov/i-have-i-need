@@ -1,0 +1,130 @@
+// .camden-form {
+//   input[type=text] {
+//     border: 0;
+//     border-bottom: {
+//       width: 1px;
+//       style: solid;
+//       color: palette(gray);
+//     }
+//     padding: $inuit-global-spacing-unit-tiny 0;
+
+//     &:focus {
+//       color: palette(black);
+//       border-bottom-color: palette(black);
+//     }
+//   }
+
+//   input[type=search] {
+//     background: {
+//       color: palette(white);
+//       image: $search-image;
+//       repeat: no-repeat;
+//       position: 14px center;
+//     }
+//     border-radius: 10px;
+//     border: 0;
+//     padding: 8px 36px 8px;
+//   }
+
+//   input[type=checkbox] {
+//     display: none;
+//   }
+
+//   input[type=checkbox] + label {
+//     position: relative;
+//     padding-left: $inuit-global-spacing-unit;
+//   }
+
+//   input[type=checkbox] + label:before {
+//     content: "";
+//     cursor: pointer;
+//     display: inline-block;
+//     width: $inuit-global-spacing-unit-small - 1;
+//     height: $inuit-global-spacing-unit-small;
+//     background: palette(white);
+//     border: 1px solid palette(black);
+//     border-radius: 2px;
+//     margin-right: $inuit-global-spacing-unit-small;
+//     position: absolute;
+//     left: 0;
+//   }
+
+//   input[type=checkbox]:checked + label:before {
+//     background: palette(blue);
+//     border: 0;
+//   }
+
+//   input[type=checkbox]:checked + label:after {
+//     content: "";
+//     cursor: pointer;
+//     display: inline-block;
+//     background: palette(white);
+//     width: 9px;
+//     height: 11px;
+//     border-radius: 2px;
+//     position: absolute;
+//     left: 3px;
+//     top: 4px;
+//     @extend .c-icon--tick;
+//     mask-repeat: no-repeat;
+//     mask-position: top;
+//   }
+
+//   input[type=radio] {
+//     display: none;
+//   }
+
+//   input[type=radio] + label {
+//     position: relative;
+//     display: inline-block;
+//   }
+
+//   input[type=radio] + label:before {
+//     content: "";
+//     display: inline-block;
+//     float: left;
+//     border: 1px solid black;
+//     border-radius: 50%;
+//     width: $inuit-global-line-height;
+//     height: $inuit-global-line-height;
+//     margin-right: $inuit-global-spacing-unit-small;
+//   }
+
+//   input[type=radio]:checked + label:after {
+//     content: "";
+//     display: block;
+//     position: absolute;
+//     left: 4px;
+//     top: 4px;
+
+//     background: palette(black);
+//     border-radius: 50%;
+//     width: $inuit-global-spacing-unit-small;
+//     height: $inuit-global-spacing-unit-small;
+//   }
+
+//   .select-container {
+//     position: relative;
+//     select {
+//       -webkit-appearance: none;
+//       appearance: none;
+//       background: palette(off-white);
+//       border: 0;
+//       padding: $inuit-global-spacing-unit-small;
+//       width: 100%;
+//     }
+//     &:after {
+//       content: "";
+//       display: block;
+//       position: absolute;
+//       top: $inuit-global-spacing-unit-small;
+//       right: $inuit-global-spacing-unit-small;
+//       height: $inuit-global-spacing-unit;
+//       width: $inuit-global-spacing-unit-small;
+//       background: palette(black);
+//       mask-repeat: no-repeat;
+//       mask-position: center;
+//       @extend .c-icon--chevron-down;
+//     }
+//   }
+// }

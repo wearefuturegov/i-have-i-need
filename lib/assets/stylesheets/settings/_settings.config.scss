@@ -1,0 +1,53 @@
+///* ========================================================================
+//   #CONFIG
+//   ======================================================================== */
+
+$inuit-global-baseline:     8px;
+$inuit-global-spacing-unit-factor-tiny:   1 !default;   // 8px
+$inuit-global-spacing-unit-factor-small:  2 !default;   // 16px
+$inuit-global-spacing-unit-factor:        3 !default;   // 24px
+$inuit-global-spacing-unit-factor-large:  4 !default;   // 32px
+$inuit-global-spacing-unit-factor-huge:   5 !default;   // 40px
+
+$inuit-fractions: 1 2 3 4 5 10 12;
+
+$inuit-spacing-directions: (
+  null: null,
+  't': '-top',
+  'r': '-right',
+  'b': '-bottom',
+  'l': '-left',
+) !default;
+
+$inuit-spacing-properties: (
+  'p': 'padding',
+  'm': 'margin',
+) !default;
+
+
+
+$inuit-widths-delimiter: '-of-';
+
+$inuit-widths-breakpoint-separator: '-';
+
+// A map of global config settings. Define any project-level configuration,
+// feature switches, etc. in here.
+
+$inuit-config: (
+  env: dev,
+  healthcheck: false,
+  debug: true,
+);
+
+
+// You can access data in this map using the following function:
+//
+// inuit-config(<key>)
+//
+// Example usage:
+//
+// @if (inuit-config(debug) == true) { ...  }
+
+@function inuit-config($key) {
+  @return map-get($inuit-config, $key);
+}

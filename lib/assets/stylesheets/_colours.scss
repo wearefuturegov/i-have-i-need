@@ -1,0 +1,42 @@
+@use 'sass:map';
+
+@function palette($name) {
+  @return map-get($palette, $name);
+}
+
+$palette: (
+  black: #2F2D2E,
+  blue: #156BEC,
+  white: #FFF,
+  green: #22C99B,
+  orange: #F18F01,
+  yellow: #F4E781,
+  red: #DD0019,
+  light-gray: #E5E5E5,
+  gray: #C4C4C4,
+  dark-gray: #54585A,
+  off-black: #2A2828,
+  off-white: #F6F6F6
+);
+
+$primary-colour: palette(blue) !default;
+$secondary-colour: palette(green) !default;
+$tertiary-colour: palette(gray) !default;
+
+$palette: map.set($palette, primary, $primary-colour);
+$palette: map.set($palette, secondary, $secondary-colour);
+$palette: map.set($palette, tertiary, $tertiary-colour);
+
+@each $name, $colour in $palette {
+  .c-#{""+$name} {
+    color: $colour;
+  }
+
+  .bg-#{""+$name} {
+    background: $colour;
+  }
+
+  .b-#{""+$name} {
+    border-color: $colour;
+  }
+}

@@ -1,0 +1,173 @@
+/* ==========================================================================
+   #BUTTONS
+   ========================================================================== */
+
+/**
+ * This is an example component. Extend inuitcss by building your own components
+ * that make up your UI. Component classes are prefixed with a `c-`.
+ */
+
+/**
+ * 1. Allow us to style box model properties.
+ * 2. Line different sized buttons up a little nicer.
+ * 3. Make buttons inherit font styles (often necessary when styling `input`s as
+ *    buttons).
+ * 4. Reset/normalize some styles.
+ * 5. Force all button-styled elements to appear clickable.
+ */
+
+.c-btn {
+  display: inline-block; /* [1] */
+  vertical-align: middle; /* [2] */
+  font: inherit; /* [3] */
+  text-align: center; /* [4] */
+  margin: 0; /* [4] */
+  cursor: pointer; /* [5] */
+  padding: $inuit-global-spacing-unit-tiny $inuit-global-spacing-unit-small;
+  transition: $global-transition;
+  border-radius: $global-radius;
+  border: 0;
+}
+
+
+
+
+
+/* Style variants
+   ========================================================================== */
+
+.c-btn--primary {
+  background-color: palette(primary);
+  color: #fff;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none; /* [4] */
+  }
+
+  &:hover,
+  &:focus {
+      background-color: darken(palette(primary), 10);
+  }
+
+}
+
+
+.c-btn--secondary {
+  background-color: palette(secondary);
+  color: #fff;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: darken(palette(secondary), 10);
+  }
+
+}
+
+
+.c-btn--tertiary {
+  background-color: palette(tertiary);
+  color: #fff;
+  border: 0;
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+  }
+
+  &:hover,
+  &:focus {
+    background-color: darken(palette(tertiary), 10);
+  }
+
+}
+
+
+
+
+
+/* Size variants
+   ========================================================================== */
+
+.c-btn--small {
+  padding: $inuit-global-spacing-unit-tiny $inuit-global-spacing-unit-small;
+}
+
+.c-btn--large {
+  padding: $inuit-global-spacing-unit $inuit-global-spacing-unit-large;
+}
+
+
+
+
+
+/* Ghost buttons
+   ========================================================================== */
+
+/**
+ * Ghost buttons have see-through backgrounds and are bordered.
+ */
+
+$btn-ghost-border-width: 2px;
+
+.c-btn--ghost {
+  border: $btn-ghost-border-width solid currentColor;
+  padding: ($inuit-global-spacing-unit-small - $btn-ghost-border-width) ($inuit-global-spacing-unit - $btn-ghost-border-width);
+
+  &,
+  &:hover,
+  &:active,
+  &:focus {
+    background: none;
+  }
+
+  &.c-btn--small {
+    padding: ($inuit-global-spacing-unit-tiny - $btn-ghost-border-width) ($inuit-global-spacing-unit-small - $btn-ghost-border-width);
+  }
+
+  &.c-btn--large {
+    padding: ($inuit-global-spacing-unit - $btn-ghost-border-width) ($inuit-global-spacing-unit-large - $btn-ghost-border-width);
+  }
+
+  &.c-btn--primary {
+      color: palette(white);
+
+    &:hover,
+    &:focus {
+      color: darken(palette(primary), 10);
+    }
+
+  }
+
+  &.c-btn--secondary {
+    color: #2f4054;
+    background-color: palette(secondary);
+
+    &:hover,
+    &:focus {
+      color: #1d2733;
+    }
+
+  }
+
+  &.c-btn--tertiary {
+    color: #fff;
+    background-color: palette(tertiary);
+
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+}
