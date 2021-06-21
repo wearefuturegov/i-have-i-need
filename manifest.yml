@@ -2,7 +2,7 @@ applications:
   - name: beacon-support
     memory: 1024M
     buildpacks:
-      - ruby_buildpack
+      - https://github.com/cloudfoundry/ruby-buildpack.git#v1.8.40
     services:
       - beacon-postgres
       - beacon-postgres-audit-logs
